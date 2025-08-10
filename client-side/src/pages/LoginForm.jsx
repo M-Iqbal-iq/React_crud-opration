@@ -9,7 +9,7 @@ const LoginForm = () => {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (user) {
-      navigate('/admin/dashboard')
+      navigate('/admin')
     }
   }, [])
 
@@ -34,9 +34,10 @@ const LoginForm = () => {
       setCridencial({ email: "", password: "" }); // Reset form
 
       // Redirect or perform other actions after successful login;
-      localStorage.setItem("user", JSON.stringify(res.data.userin));
+      // localStorage.setItem("user", JSON.stringify(res.data.userin));
+      localStorage.setItem("user", JSON.stringify(res.data.token));
 
-      navigate("/admin/dashboard"); // Redirect to dashboard or home page
+      navigate("/admin"); // Redirect to dashboard or home page
 
 
     } catch (error) {
@@ -48,49 +49,43 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="card">
-            <div className="card-header">Login</div>
-            <div className="card-body">
-              <div className="card-body">
-                <form onSubmit={handleSubmit} className='shadow-lg rounded p-5'>
-                  <div className="form-group mb-3">
-                    <label htmlFor="email">Email address</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      placeholder="Enter email"
-                      value={cridencial.email}
-                      onChange={handleChange}
-                      name='email'
-                      required
-                    />
-                  </div>
-                  <div className="form-group mb-4">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="Password"
-                      value={cridencial.password}
-                      onChange={handleChange}
-                      name='password'
-                      required
-                    />
-                  </div>
-                  <button type="submit" className="btn btn-primary w-100">
-                    Login
-                  </button>
-                </form>
-              </div>
-            </div>
+    <div className="container-fluid bg-dark " style={{height:"100vh"}}>
+      <div className="d-flex text-align-center justify-content-center align-items-center h-100 " >
+        <div className="">
+        <form onSubmit={handleSubmit} className='shadow-lg shadow-light rounded p-5 bg-light' style={{width:'400px'}}>
+          <h3 className='text-center pb-3'>Login</h3>
+          <div className="form-group mb-3">
+            <label htmlFor="email">Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Enter email"
+              value={cridencial.email}
+              onChange={handleChange}
+              name='email'
+              required
+            />
           </div>
-        </div>
-      </div>
+          <div className="form-group mb-4">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Password"
+              value={cridencial.password}
+              onChange={handleChange}
+              name='password'
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">
+            Login
+          </button>
+        </form>
+       </div>
+     </div>
     </div>
   );
 };

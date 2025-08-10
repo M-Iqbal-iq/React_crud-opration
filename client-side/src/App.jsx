@@ -20,7 +20,7 @@ const App = () => {
       <Router>
         <Routes>  {/* Wrap Route inside Routes */}
           
-          <Route path='/' element={<Home />} />  {/* Use element prop instead of component */}
+          <Route path='/' element={<LoginForm />} />  {/* Use element prop instead of component */}
           <Route path='/login' element={< LoginForm />} />
           <Route path='/admin' element={<Dashbaord />}>
            <Route index element={<DashbordCard />} />

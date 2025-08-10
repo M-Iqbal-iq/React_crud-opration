@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 const UserModel = require("../models/user_model");
 const jwt = require('jsonwebtoken')
 
@@ -75,18 +75,14 @@ const ToLogin  = async (req,res) =>{
         }
         if(userin.password !== password){
            return res.status(400).json({msg:"Email or password is incorrect"})
-        }
-        // if user is found then create a token
-        // and send it to the user  
-        // const token = jwt.sign({id:userin._id},process.env.JWT_SECRET,{expiresIn:'1d'});
+        };
+        
 
-        // const token = jwt.sign({id:userin._id},process.env.secrit_key ,{expiresIn:'1h'});
-        const token = jwt.sign({id:userin._id},'hairaniflf' ,{expiresIn:'1h'});
 
-        res.status(200).json({msg:"login in successfully",token,userin})
-        // res.status(200).json({msg:"login in successfully"}) 
+        const token = jwt.sign({id:userin._id},process.env.JWT_SECRET ,{expiresIn:'5s'});
+        res.status(200).json({msg:"login in successfully",token,userin});
     } catch (error) {
-        console.log(error)
+        console.log(`the error is in login api : ${error}`)
     }
 
 }

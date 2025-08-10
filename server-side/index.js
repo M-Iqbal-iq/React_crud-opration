@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 
 const express = require('express');
 const server = express()
@@ -32,7 +32,8 @@ server.use('/',Products_routes)
 
 
 // const PORT  = process.env.PORT || 6001;
-const PORT = 6003
+const PORT = process.env.PORT || 6001
+// const PORT = 6003
 server.listen(PORT,()=>{
     console.log(`server is listning on http://localhost:${PORT}`)
 })

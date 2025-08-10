@@ -1,7 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+
+
 
 const Sidbare  = () => {
+  const navigate = useNavigate()
+  const handleLogout = ()=>{
+    const logout = localStorage.removeItem('user');
+    toast.success("You have been Logout")
+    navigate('/login')
+  }
   return (
     <div className="d-flex flex-column flex-shrink-0 p-3 bg-light shadow" style={{ width: '250px', height: '100vh',borderRight:'1px solid lightgray' }}>
       <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
@@ -41,7 +51,7 @@ const Sidbare  = () => {
           </a>
         </li>
         <li>
-          <a href="/logout" className="nav-link text-dark">
+          <a onClick={handleLogout} className="nav-link text-dark">
             <i className="bi bi-box-arrow-right me-2"></i>
             Logout
           </a>
