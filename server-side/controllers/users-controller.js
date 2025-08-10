@@ -1,3 +1,4 @@
+// require('dotenv').config()
 const UserModel = require("../models/user_model");
 const jwt = require('jsonwebtoken')
 
@@ -58,14 +59,14 @@ const deleteUser = async (req,res) =>{
         if(!user){
             return res.status(404).json({msg:"user not found"})
         }
-        res.json({msg:"user deleted successfully"});
+        res.status(200).json({msg:"user deleted successfully"});
     } catch (error) {
         console.log(error);
     }
 }
 
 // for login in end poing 
-const ToLogin  = async (req,res) =>{t
+const ToLogin  = async (req,res) =>{
     const {email, password } = req.body
     try {
         const userin = await UserModel.findOne({email});
@@ -75,19 +76,21 @@ const ToLogin  = async (req,res) =>{t
         if(userin.password !== password){
            return res.status(400).json({msg:"Email or password is incorrect"})
         }
+        // if user is found then create a token
+        // and send it to the user  
+        // const token = jwt.sign({id:userin._id},process.env.JWT_SECRET,{expiresIn:'1d'});
 
+        // const token = jwt.sign({id:userin._id},process.env.secrit_key ,{expiresIn:'1h'});
+        const token = jwt.sign({id:userin._id},'hairaniflf' ,{expiresIn:'1h'});
 
-
-        // res.status(200).json({msg:"login in successfully"})
-
-        res ={
-        }
-        
+        res.status(200).json({msg:"login in successfully",token,userin})
+        // res.status(200).json({msg:"login in successfully"}) 
     } catch (error) {
         console.log(error)
     }
 
 }
+
 
 
 
